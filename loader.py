@@ -1,5 +1,5 @@
 import json
-#from MAX528 import MAX528
+from MAX528 import MAX528
 
 DAC1 = 22
 DAC2 = 17
@@ -11,10 +11,10 @@ class loader:
         self.channels = []
         self.dac_s = []
         self.dac_p = []
-        #self.dac_s.append(MAX528(0,DAC1))
-        #self.dac_s.append(MAX528(0,DAC2))
-        #self.dac_p.append(MAX528(0,DAC3))
-        #self.dac_p.append(MAX528(0,DAC4))
+        self.dac_s.append(MAX528(0,DAC1))
+        self.dac_s.append(MAX528(0,DAC2))
+        self.dac_p.append(MAX528(0,DAC3))
+        self.dac_p.append(MAX528(0,DAC4))
 
 
     def load_file(self, filename):
@@ -36,8 +36,8 @@ class loader:
         """
         dac_nr = (channel-1)//8
         dac_ch = (channel-1)%8
-        #self.dac_s[dac_nr].set_dac_channel(dac_ch,at_ser)
-        #self.dac_p[dac_nr].set_dac_channel(dac_ch,at_par)
+        self.dac_s[dac_nr].set_dac_channel(dac_ch,at_ser)
+        self.dac_p[dac_nr].set_dac_channel(dac_ch,at_par)
         print("Set output channel %2d to (%3d,%3d)"%(channel, at_ser, at_par))
     
     def set_channels_file(self, filename):
