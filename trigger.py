@@ -7,7 +7,8 @@ import time
 
 import pigpio
 
-GPIO=13\
+GPIO=13
+WIDTH=10
 
 parser = argparse.ArgumentParser(description='2x2 Pulser trigger script')
 parser.add_argument('-p','--period',type=int, help='Period [ms]',default=10)
@@ -27,7 +28,7 @@ if __name__=='__main__':
    period_us = int(args.period*1000)
 
    #                          ON       OFF      MICROS
-   square.append(pigpio.pulse(1<<GPIO, 0,       10))
+   square.append(pigpio.pulse(1<<GPIO, 0,       WIDTH))
    square.append(pigpio.pulse(0,       1<<GPIO, period_us))
 
    pi = pigpio.pi() # connect to local Pi
