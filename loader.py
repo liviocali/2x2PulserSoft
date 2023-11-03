@@ -41,6 +41,29 @@ class loader:
         print("Set output channel %2d to (%3d,%3d)"%(channel, at_ser, at_par))
     
     def set_channels_file(self, filename):
+        """
+        Set pulser output channel voltage using config file
+        The file must have the format:
+        {"channels": { 
+            "ch01": [0, 0],
+            "ch02": [0, 0],
+            "ch03": [0, 0],
+            "ch04": [0, 0],
+            "ch05": [0, 0],
+            "ch06": [0, 0],
+            "ch07": [0, 0],
+            "ch08": [0, 0],
+            "ch09": [0, 0],
+            "ch10": [0, 0],
+            "ch11": [0, 0],
+            "ch12": [0, 0],
+            "ch13": [0, 0],
+            "ch14": [0, 0],
+            "ch15": [0, 0],
+            "ch16": [0, 0]
+            }
+        }
+        """
         setv_s, setv_p = self.load_file(filename)
         for ch in range(16):
             self.set_channel(ch+1, setv_s[ch], setv_p[ch])

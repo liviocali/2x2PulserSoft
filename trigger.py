@@ -10,7 +10,8 @@ import pigpio
 GPIO=13\
 
 parser = argparse.ArgumentParser(description='2x2 Pulser trigger script')
-parser.add_argument('-p','--period',help='Period [ms]',action='store_true',default=10)
+parser.add_argument('-p','--period',type=int, help='Period [ms]',default=10)
+parser.add_argument('-d','--duration',type=int, help='Duriation [s]',default=60)
 args = parser.parse_args()
 
 def ctrlc_handler(signal_received, frame):
@@ -25,9 +26,9 @@ if __name__=='__main__':
    square = []
    period_us = int(args.period*1000)
 
-   #                          ON       OFF    MICROS
+   #                          ON       OFF      MICROS
    square.append(pigpio.pulse(1<<GPIO, 0,       10))
-   square.append(pigpio.pulse(0,       1<<GPIO, 10000))
+   square.append(pigpio.pulse(0,       1<<GPIO, period_us))
 
    pi = pigpio.pi() # connect to local Pi
 
@@ -39,7 +40,7 @@ if __name__=='__main__':
 
    if wid >= 0:
       pi.wave_send_repeat(wid)
-      time.sleep(60)
+      time.sleep(args.duration)
       pi.wave_tx_stop()
       pi.wave_delete(wid)
 
