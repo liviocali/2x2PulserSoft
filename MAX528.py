@@ -16,7 +16,7 @@ class MAX528:
         GPIO.setup(self.cepin,GPIO.OUT)
         GPIO.output(self.cepin,GPIO.HIGH)
 
-    def set_channel(self,channel,value):
+    def set_dac_channel(self,channel,value):
         GPIO.output(self.cepin,GPIO.LOW) #activate chip select
         bytechannel= 2**channel
         bytevalue = value
@@ -28,7 +28,7 @@ class MAX528:
 
     def scan_channel(self,channel):
         for i in range(0,255,5):
-            self.set_channel(channel,i)
+            self.set__dac_channel(channel,i)
 
     def __del__(self):
         self.spi.close()
