@@ -1,0 +1,14 @@
+# /etc/systemd/system/my_app.service
+[Unit]
+Description=2x2 Pulser server
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi
+ExecStart=ppulse run-server
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

@@ -1,5 +1,6 @@
 import json
-from MAX528 import MAX528
+from ppulse.MAX528 import MAX528
+from ppulse import config
 
 DAC1 = 22
 DAC2 = 17
@@ -65,7 +66,13 @@ class loader:
         }
         """
         setv_s, setv_p = self.load_file(filename)
-        for ch in range(16):
+        for ch in range(config.NCHAN):
             self.set_channel(ch+1, setv_s[ch], setv_p[ch])
 
+    def set_channels(self, setv_s, setv_p):
+        """
+        Set pulser output channel voltage using input lists
+        """
+        for ch in range(config.NCHAN):
+            self.set_channel(ch+1, setv_s[ch], setv_p[ch])
 

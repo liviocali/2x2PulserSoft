@@ -1,0 +1,6 @@
+# Server settings
+Host: localhost
+Port: 5020
+
+#Pulser settings
+Nchan: 16
