@@ -1,5 +1,5 @@
 import json
-from ppulse.MAX528 import MAX528
+from ppulseserver.MAX528 import MAX528
 from ppulse import config
 
 DAC1 = 22

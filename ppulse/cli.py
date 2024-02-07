@@ -1,15 +1,15 @@
 import click
 from ppulse import client
-from ppulse import server
+#from ppulse import server
 
 
 @click.group()
 def ppulse():
     pass
 
-@ppulse.command()
-def run_server():
-    server.start_server()
+#@ppulse.command()
+#def run_server():
+#    server.start_server()
 
 @ppulse.command()
 def server_status():

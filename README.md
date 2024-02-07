@@ -11,3 +11,11 @@ Check if spi running
 ```
 lsmod | grep spi_
 ```
+
+#Add server service
+```
+sudo cp ppulseserver.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable ppulseserver
+sudo systemctl restart ppulseserver
+```

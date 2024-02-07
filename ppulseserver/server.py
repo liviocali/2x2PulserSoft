@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from ppulse import config
-from ppulse import loader
+from ppulseserver import loader
 from waitress import serve
 
 
@@ -16,8 +16,8 @@ def get_loader():
 def start_server():
     host = config.get_server_address()['host']
     port = config.get_server_address()['port']
-    app.run(host=host, port=port, debug=True)
-    #serve(app, host="0.0.0.0", port=port)
+    #app.run(host=host, port=port, debug=True)
+    serve(app, host="0.0.0.0", port=port)
 
 @app.route("/set_channel", methods=['POST'])
 def set_channel():
