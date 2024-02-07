@@ -3,7 +3,7 @@ from os.path import abspath
 from ppulse import errors
 
 REPOSITORY_NAME = f'ppulse'
-CONFIG = f'server_config.yaml'
+CONFIG = f'ppulse/server_config.yaml'
 NCHAN = 16
 
 def get_app_path():

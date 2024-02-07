@@ -2,6 +2,8 @@ import os, sys
 import setuptools
 from setuptools import find_packages
 
+os.system("cp server_config.yaml ppulse/")
+
 if "--client_only" in sys.argv:
     install_list = ['ppulse']
     cli_list = {
@@ -38,4 +40,8 @@ setuptools.setup(
                  "Programming Language :: Python :: 3",
                  "Programming Language :: Python :: 3.6"],
     entry_points=cli_list,
+    include_package_data=True,
+    package_data = {
+        '': ['*.yaml']
+    },
 )
