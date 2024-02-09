@@ -1,15 +1,10 @@
 import click
 from ppulse import client
-#from ppulse import server
 
 
 @click.group()
 def ppulse():
     pass
-
-#@ppulse.command()
-#def run_server():
-#    server.start_server()
 
 @ppulse.command()
 def server_status():
@@ -26,3 +21,13 @@ def set_channel(channel, at_ser, at_par):
 @click.option("--filename", "-f", required=True, type=str, help="Config file (see template)")
 def set_channels_file(filename):
     client.set_channels_file(filename)
+
+@ppulse.command()
+@click.option("--period", "-p", required=True, type=int, help="Trigger period in ms (3-1000)")
+def set_trigger(period):
+    client.set_trig(period)
+
+@ppulse.command()
+@click.option("--duration", "-d", required=True, type=int, help="Trigger duration in seconds (1-600)")
+def run_trigger(duration):
+    client.run_trig(duration)

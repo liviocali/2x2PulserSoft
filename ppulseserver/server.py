@@ -1,17 +1,24 @@
 from flask import Flask, request, jsonify
 from ppulse import config
-from ppulseserver import loader
+from ppulseserver import loader, trigger
 from waitress import serve
 
 
 app = Flask(__name__)
 LOADER = None
+TRIG = None
 
 def get_loader():
     global LOADER
     if LOADER is None:
         LOADER = loader.loader()
     return LOADER
+
+def get_trig():
+    global TRIG
+    if TRIG is None:
+        TRIG = trigger.trigger()
+    return TRIG
 
 def start_server():
     host = config.get_server_address()['host']
@@ -36,9 +43,21 @@ def set_channels_file():
     get_loader().set_channels(at_ser_list,at_par_list)
     return jsonify(None)
 
-@app.route("/reset", methods=['POST'])
-def reset():
+@app.route("/reset_channels", methods=['POST'])
+def reset_channels():
     at_ser_list = [0]*16
     at_par_list = [0]*16
     get_loader().set_channels(ch,at_ser_list,at_par_list)
+    return jsonify(None)
+
+@app.route("/set_trig", methods=['POST'])
+def set_trig():
+    data = request.get_json()
+    get_trig().reset_period(period=int(data['period']))
+    return jsonify(None)
+
+@app.route("/run_trig", methods=['POST'])
+def run_trig():
+    data = request.get_json()
+    get_trig().run(duration=int(data['duration']))
     return jsonify(None)

@@ -28,7 +28,7 @@ def cli_server_status():
         print('Server is not available!')
 
 def set_channel(channel, at_ser, at_par):
-    errors.error_control(available_server(),check_channel(channel),check_values(at_ser,at_par))
+    errors.error_control(available_server(),errors.check_channel(channel),errors.check_values(at_ser,at_par))
     data = {'ch': channel, 'at_ser': at_ser, 'at_par': at_par}
     server_url = get_server_url()
     url = f'{server_url}/set_channel'
@@ -52,18 +52,6 @@ def set_channels_file(filename):
         answ = resp.json()
         return answ
 
-def check_channel(channel):
-    if 1<channel>config.NCHAN:
-        return -4
-
-def check_values(at_ser,at_par):
-    if 0<at_ser>255:
-        return -5
-    if 0<at_par>255:
-        return -5
-    if at_par>0 and at_ser<0:
-        return -6
-
 def load_file(filename):
     try:
         with open(filename, 'r') as file:
@@ -77,4 +65,23 @@ def load_file(filename):
     except:
         errors.error_control(-8)
 
+def set_trig(period):
+    errors.error_control(available_server(),errors.check_period(period))
+    data = {'period': period}
+    server_url = get_server_url()
+    url = f'{server_url}/set_trig'
+    print('Set trigger period to %d ms' % period)
+    with requests.post(url,json=data) as resp:
+        answ = resp.json()
+        return answ
 
+
+def run_trig(duration):
+    errors.error_control(available_server(),errors.check_duration(duration))
+    data = {'duration': duration}
+    server_url = get_server_url()
+    url = f'{server_url}/run_trig'
+    print('Run trigger for %d s' % duration)
+    with requests.post(url,json=data) as resp:
+        answ = resp.json()
+        return answ
