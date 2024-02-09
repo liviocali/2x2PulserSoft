@@ -1,0 +1,10 @@
+bin
+build
+*.egg-info
+*.egg*
+*.pyc
+.vscode
+.idea
+*.db
+__pycache__
+*.yaml
