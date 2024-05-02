@@ -11,12 +11,16 @@ pip install . --client_only
 ```
 
 ### Installation on pulser device
-#### Enable SPI
-To run the pulser server on the built in Raspberry Pi SPI needs to be enabled.
+#### Enable SPI and pigpiod
+To run the pulser server on the built in Raspberry Pi SPI and pigpiod needs to be enabled.
 
-First change boot config
+First change boot config for spi
 ```
 sudo sed -i 's/#dtparam=spi=on/dtparam=spi=on/' /boot/config.txt
+```
+To enable pigpiod execute
+```
+sudo systemctl enable pigpiod
 ```
 After this a reboot is needed
 ```
@@ -45,6 +49,8 @@ sudo systemctl enable ppulseserver
 sudo systemctl restart ppulseserver
 ```
 The server is now running on boot up of the pulser.
+
+If the service is not starting properly check the executable path in ```/etc/systemd/system/ppulseserver.service```.
 
 ## Usage
 To run the pulser first check that the device server is running

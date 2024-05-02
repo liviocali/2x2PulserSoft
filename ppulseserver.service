@@ -7,7 +7,7 @@ After=network.target
 Type=simple
 User=pi
 WorkingDirectory=/home/pi
-ExecStart=ppulseserver run-server
+ExecStart=/home/pi/.local/bin/ppulseserver run-server
 Restart=always
 
 [Install]
