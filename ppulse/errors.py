@@ -1,4 +1,5 @@
 import sys
+from ppulse import config
 
 ERRORS = {
         -1:  {"name": "YAML_ERROR", "description": "ERROR: server_config.yaml file not found! Check the path!"},

@@ -43,7 +43,7 @@ def set_channels_file(filename):
     if len(setv_s) != config.NCHAN:
         errors.error_control(-7)
     for ch in range(config.NCHAN):
-        errors.error_control(check_values(setv_s[ch], setv_p[ch]))
+        errors.error_control(errors.check_values(setv_s[ch], setv_p[ch]))
         print('Set channel %02d to (%03d, %03d)'%(ch+1,setv_s[ch], setv_p[ch]))
     data = {'at_ser_list': setv_s, 'at_par_list': setv_p}
     server_url = get_server_url()
