@@ -20,11 +20,11 @@ class MAX528:
         GPIO.output(self.cepin,GPIO.LOW) #activate chip select
         bytechannel= 2**channel
         bytevalue = value
-        time.sleep(0.1)
+        time.sleep(0.01)
         self.spi.writebytes([bytechannel,bytevalue]) #write DAC value
-        time.sleep(0.1)
+        time.sleep(0.01)
         GPIO.output(self.cepin,GPIO.HIGH)
-        time.sleep(0.5)
+        time.sleep(0.05)
 
     def scan_channel(self,channel):
         for i in range(0,255,5):
